@@ -1,24 +1,18 @@
-const allNodes = document.body.getElementsByTagName('*');
 
-function byTagName(node, tagName) {
-for (let i = 0; i < allNodes.length; i++){
-    console.log(allNodes[i].nodeType)
+  function byTagName(node, tagName) {
+let wantedTag = tagName.toUpperCase();
+
+var c = node.children;
+var x = [] ;
+for(var i =0; i<c.length;i++)
+ {
+  
+  if(c[i].tagName===wantedTag){ // children_tag_name should be in capital, eg. "SPAN"
+   x.push(c[i]);
+  }
 }
-}
-
-//     let childNodes = node.childNodes,
-//         children = [],
-//         i = childNodes.length;
-
-//     while (i--) {
-//         if (childNodes[i].nodeType == 1) {
-//             children.unshift(childNodes[i]);
-//             console.log(childNodes[i].nodeName);
-//         }
-//     }
-
-//     return children;
-//   }
+    return x
+  }
 
   console.log(byTagName(document.body, "h1").length);
   // → 1
