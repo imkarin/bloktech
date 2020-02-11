@@ -1,5 +1,4 @@
-
-  function byTagName(node, tagName) {
+function byTagName(node, tagName) {
 let wantedTag = tagName.toUpperCase();
 
 var c = node.children;
