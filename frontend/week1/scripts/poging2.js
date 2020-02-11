@@ -9,7 +9,7 @@ function byTagName(node, tagName) {
     }
   }
   
-  return x
+  return x // return the array with matching nodes
 }
   
 console.log(byTagName(document.body, "h1").length);
