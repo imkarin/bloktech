@@ -1,7 +1,7 @@
 function byTagName(node, tagName) {
   let wantedTag = tagName.toUpperCase();
   let c = node.getElementsByTagName("*");
-  let x = [] ;
+  let x = [];
   
   for(let i = 0; i < c.length; i++) {
     if(c[i].tagName===wantedTag){ // add only nodes with the wanted tags to the array
