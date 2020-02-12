@@ -25,6 +25,6 @@ app.get('/contact', (req, res) => {
 })
 
 // 404 - route not found
-app.get('/*', (req, res) => {
-    res.send('oops')
-})
+
+// Load static files
+app.use(express.static('public'));
