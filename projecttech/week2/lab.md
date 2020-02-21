@@ -17,10 +17,10 @@ Bash is een Unix shell. Bash is a variant of the terminal, just like ZSH. Defaul
 * sudo = super user do, dangerous!
 
 
-(Hyper is html/css based, link with ZSH and experiment.)[https://www.robertcooper.me/elegant-development-experience-with-zsh-and-hyper-terminal]
+[Hyper is html/css based, link with ZSH and experiment.](https://www.robertcooper.me/elegant-development-experience-with-zsh-and-hyper-terminal)
 
 ## Github Pages (III/VI)
-(github.com/turiguilano/githubpages)[github.com/turiguilano/githubpages]
+[github.com/turiguilano/githubpages](github.com/turiguilano/githubpages)
 
 ### Machine
 You can customise your command line by changing the config file. Check sadistic sun dotfiles, for example.
