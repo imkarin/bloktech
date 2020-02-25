@@ -5,9 +5,9 @@
 }
 
 body {
-    background: #fff;
+    background: rgb(247, 247, 247);
     font-size: 1em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Light', sans-serif;
     color: #000;
 }
 
@@ -19,7 +19,8 @@ h2, h3, h4, h5, h6 {
 
 h1 {
     font-family: 'Montserrat', 'Roboto', sans-serif;
-    font-size: 2em;
+    font-size: 1.7em;
+    line-height: 1.7em;
 }
 
 h2 {
@@ -33,7 +34,7 @@ h3 {
 
 a, a:active, a:visited {
     text-decoration: none;
-
+    color: rgb(177, 177, 177);
 }
 
 a:hover {
@@ -59,6 +60,17 @@ header {
         margin-top: -150px;
         min-height: 800px;
     }
+}
+
+header a, header a:active, header a:visited, header a:hover {
+    z-index: 3000;
+    top: 6px;
+    right: 15px;
+    position: absolute;
+    color: #fff;
+    font-family: 'Montserrat Light', sans-serif;
+    font-size: 2em;
+    text-transform: lowercase;
 }
 
 header img:first-of-type { 
