@@ -16,26 +16,30 @@ app.use(express.static('public'));
 
 // Creating end points/route handlers
 app.get('/', (req, res) => {
-    //console log het request
-    res.send('Hello World!')
+    res.send('Welcome to the homepage');
 })
 
 app.get('/about', (req, res) => {
-    console.log(req.query)
-    res.sendFile(path.join(__dirname + '/public/index.html'));
+    res.sendFile(path.join(__dirname + '/public/pagina.html'));
 })
 
 app.get('/contact', (req, res) => {
-    res.send('Contact route')
+    res.send('Contact route');
 })
 
 app.get('/mp3', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/audio/bruh.mp3'));
-
 })
+
+app.get('/profile', (req, res) => {
+  console.log(req.query);
+  res.send(`You're viewing ` + req.query['username'] + `'s profile`);
+})
+
 
 // 404 - route not found
 
 
 // Listen on a port
 app.listen(3000);
+
