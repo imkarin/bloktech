@@ -88,7 +88,7 @@ main > ul figure {
     color: #000;
 }
 
-main > ul figure > div:first-of-type {
+main > ul figure > img {
     margin-top: -25px;
     margin-left: -25px;
     position: relative;
@@ -98,9 +98,8 @@ main > ul figure > div:first-of-type {
     background: #fffaaa;
     border-top-left-radius: 9px;
     border-top-right-radius: 9px;
-
-    background-image: url(../images/girl.jpeg);
-    background-size: cover;
+    object-fit: cover;
+    object-position: center;
 }
 
 main > ul figure > figcaption {
