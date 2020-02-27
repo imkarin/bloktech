@@ -88,7 +88,7 @@ main > ul figure {
     color: #000;
 }
 
-main > ul figure > img {
+main > ul figure img {
     margin-top: -25px;
     margin-left: -25px;
     position: relative;
@@ -124,7 +124,28 @@ main > ul figure > figcaption > button {
     font-size: 1.4em;
     color: #fff;
     box-shadow: 0 0 5px 5px rgba(0, 0, 0, .1);
+    transition-delay: .2s;
+    transition-duration: .4s;
 }
+
+main > ul figure > figcaption > button:active {
+    background: #ff6c71;
+    transition-delay: 0s;
+    transition-duration: .2s;
+}
+
+main > ul figure > figcaption > button:nth-of-type(2) {
+    background: #cacaca;
+    right: 80px;
+}
+
+
+main > ul figure > figcaption > button:nth-of-type(2):active {
+    background: #bb2222;
+    transition-delay: 0s;
+    transition-duration: .2s;
+}
+
 
 main > ul figure > figcaption > section {
     position: absolute;
@@ -139,6 +160,16 @@ main > ul figure > figcaption > section > p {
     border-radius: 4px;
     background: #ffb4b7;
     color: white;
+}
+
+/* when there are no more people to display, screen becomes empty */
+main > ul.invisible {
+    display: none;
+}
+
+main > p:first-of-type {
+    margin-top: 40vh;
+    text-align: center;
 }
 
 /* bottom nav */

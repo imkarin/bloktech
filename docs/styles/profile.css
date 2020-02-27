@@ -98,6 +98,24 @@ header > button {
     z-index: 9999;
 }
 
+header > button:active {
+    background: #ff6c71;
+    transition-delay: 0s;
+    transition-duration: .2s;
+}
+
+header > button:nth-of-type(2) {
+    background: #cacaca;
+    right: 80px;
+}
+
+
+header > button:nth-of-type(2):active {
+    background: #bb2222;
+    transition-delay: 0s;
+    transition-duration: .2s;
+}
+
 /* profile main */
 main {
     padding: 0 25px;
