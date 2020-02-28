@@ -12,7 +12,7 @@ const express = require('express');
 const app = express();
 
 // Define static files folder
-app.use(express.static('public'));
+app.use(express.static('static'));
 
 
 // EJS -------------------------------------------------------------------------------------------
@@ -24,11 +24,11 @@ app.get('/', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/pagina.html'));
+    res.sendFile(path.join(__dirname + '/static/pagina.html'));
 })
 
 app.get('/mp3', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/audio/bruh.mp3'));
+    res.sendFile(path.join(__dirname + '/static/audio/bruh.mp3'));
 })
 
 app.get('/profile', (req, res) => {
