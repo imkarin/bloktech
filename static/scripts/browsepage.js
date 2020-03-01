@@ -32,7 +32,7 @@ para.appendChild(textNode);
 
 // first person is being shown
 let i = 0;
-headerPhoto.src = 'images/' + people[i].photo;
+headerPhoto.src = '../static/images/' + people[i].photo;
 personName.textContent = people[i].name;
 personDesc.textContent = people[i].desc;
 
@@ -49,7 +49,7 @@ function ratePerson() {
         i++;
 
         if (i < (people.length)) { // show next person
-            headerPhoto.src = 'images/' + people[i].photo;
+            headerPhoto.src = '../static/images/' + people[i].photo;
             personName.textContent = people[i].name;
             personDesc.textContent = people[i].desc;
         }

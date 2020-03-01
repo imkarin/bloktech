@@ -1,0 +1,39 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/styles/likedpage.css">
+        <title>Liked people</title>
+    </head>
+    <body>
+        <header>
+            <h1>Liked people</h1>
+        </header>
+        
+        <main>
+            <ul>
+                <% for (let i = 0; i < likedPeople.length; i++) { %>
+                    <li>
+                        <figure>
+                            <img src="../static/images/<%= likedPeople[i].photo %>" alt="Profilepicture">
+                            <figcaption>
+                                <h4><%= likedPeople[i].name %></h4>
+                                <p><%= likedPeople[i].msg %></p>
+                            </figcaption>
+                        </figure>
+                    </li>
+                <% } %>
+            </ul>
+        </main>
+
+        <footer>
+            <p>No more people in your liked list.</p>
+        </footer>
+            
+        
+        <%- include ('nav') -%>
+
+        <script src="../static/scripts/likedpage.js"></script>
+    </body>
+    </html>
