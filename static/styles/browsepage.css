@@ -110,7 +110,7 @@ main > ul figure > figcaption > h2 {
     margin-bottom: 5px;
 }
 
-main > ul figure > figcaption > button {
+main > ul figure > figcaption button {
     padding: 5px 10px;
     top: calc(76% - 70px);
     right: 20px;
@@ -128,19 +128,19 @@ main > ul figure > figcaption > button {
     transition-duration: .4s;
 }
 
-main > ul figure > figcaption > button:active {
+main > ul figure > figcaption button:active {
     background: #ff6c71;
     transition-delay: 0s;
     transition-duration: .2s;
 }
 
-main > ul figure > figcaption > button:nth-of-type(2) {
+main > ul figure > figcaption button:nth-of-type(2) {
     background: #cacaca;
     right: 80px;
 }
 
 
-main > ul figure > figcaption > button:nth-of-type(2):active {
+main > ul figure > figcaption button:nth-of-type(2):active {
     background: #bb2222;
     transition-delay: 0s;
     transition-duration: .2s;
