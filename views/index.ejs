@@ -17,24 +17,28 @@
     
     <main>
         <ul>
-            <li>
-                <figure>
-                    <a href="profile">
-                        <img src="../static/images/girl.jpeg" alt="profilepicture of the person you're viewing">
-                    </a>  
-                    <figcaption>
-                        <h2>Person name</h2>
-                        <p>Description</p>
-                        <form action=/ method="post">
-                            <label><input type="checkbox" name="liked"> Like</label>
+            <% for (let i = 0; i < likedPeople.length; i++) { %>
+                <li>
+                    <figure>
+                        <a href="profile">
+                            <img src="../static/images/<%= likedPeople[i].photo %>" alt="Profilepicture">
+                        </a>  
+                        <figcaption>
+                            <h2><%= likedPeople[i].name %></h2>
+                            <p><%= likedPeople[i].desc %></p>
+                            <form action=/ method="post">
+                                <label><input type="checkbox" name="liked"> Like</label>
 
-                            <button id="likebutton">❤</button>
-                            <button id="dislikebutton">x</button>
-                        </form>
-                    </figcaption>
-                </figure>
-            </li>
+                                <button class="likebutton">❤</button>
+                                <button class="dislikebutton">x</button>
+                            </form>
+                        </figcaption>
+                    </figure>
+                </li>
+            <% } %>
         </ul>
+
+        <p>No more people to display.</p>
     </main>
 
     

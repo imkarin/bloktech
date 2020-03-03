@@ -75,6 +75,19 @@ main figure > figcaption {
     margin-left: 15px;
 }
 
+main figure > button {
+    position: absolute;
+    right: 25px;
+    color: #c1c1c1;
+    font-size: .8em;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.invisible {
+    display: none;
+}
 
 /* footer at the end of the liked list, when there are no more people to display */
 footer {

@@ -74,13 +74,16 @@ main > ul {
 }
 
 main > ul > li {
+    position: absolute;
     margin-bottom: 10px;
     border-radius: 9px;
     padding: 25px;
     background: #fff;
     width: 100%;
     height: 100%;
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);;
+}
+main > ul > li:last-of-type {
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
 }
 
 main > ul figure {
@@ -103,6 +106,7 @@ main > ul figure img {
 }
 
 main > ul figure > figcaption {
+    position: relative;
     margin-top: 25px;
 }
 
@@ -112,8 +116,8 @@ main > ul figure > figcaption > h2 {
 
 main > ul figure > figcaption button {
     padding: 5px 10px;
-    top: calc(76% - 70px);
-    right: 20px;
+    top: -55px;
+    right: 0;
     width: 55px;
     height: 55px;
     background: #ffb4b7;
@@ -136,7 +140,7 @@ main > ul figure > figcaption button:active {
 
 main > ul figure > figcaption button:nth-of-type(2) {
     background: #cacaca;
-    right: 80px;
+    right: 65px;
 }
 
 
@@ -163,13 +167,18 @@ main > ul figure > figcaption > section > p {
 }
 
 /* when there are no more people to display, screen becomes empty */
-main > ul.invisible {
+main > li.invisible {
     display: none;
 }
 
-main > p:first-of-type {
-    margin-top: 40vh;
+main > p:last-child {
+    position: absolute;
+    left: 0;
+    top: 45vh;
+    width: 100vw;
     text-align: center;
+    z-index: -999;
+    opacity: .8;
 }
 
 /* bottom nav */

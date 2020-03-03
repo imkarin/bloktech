@@ -21,6 +21,7 @@
                                 <h4><%= likedPeople[i].name %></h4>
                                 <p><%= likedPeople[i].msg %></p>
                             </figcaption>
+                            <button>X</button>
                         </figure>
                     </li>
                 <% } %>
@@ -30,8 +31,7 @@
         <footer>
             <p>No more people in your liked list.</p>
         </footer>
-            
-        
+                    
         <%- include ('nav') -%>
 
         <script src="../static/scripts/likedpage.js"></script>
