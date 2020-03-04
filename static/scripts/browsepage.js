@@ -4,8 +4,6 @@ const people = main.getElementsByTagName('li');
 const likeButtons = document.querySelectorAll('.likebutton');
 const dislikeButtons = document.querySelectorAll('.dislikebutton');
 
-var para = main.lastElementChild;
-
 let i = 0;
 
 // when you press the (dis)like button

@@ -129,3 +129,12 @@ nav img {
     opacity: .33;
     display: block;
 }
+
+nav ul > li:last-of-type > a {
+    color: rgb(0, 0, 0, .9);
+    font-family: 'Roboto Bold', sans-serif;
+}
+
+nav ul > li:last-of-type > a > img {
+    opacity: 1;
+}

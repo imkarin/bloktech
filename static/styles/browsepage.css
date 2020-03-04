@@ -213,3 +213,12 @@ nav img {
     opacity: .33;
     display: block;
 }
+
+nav ul > li:nth-of-type(2) > a {
+    color: rgb(0, 0, 0, .9);
+    font-family: 'Roboto Bold', sans-serif;
+}
+
+nav ul > li:nth-of-type(2) > a > img {
+    opacity: .9;
+}
