@@ -17,20 +17,18 @@
     
     <main>
         <ul>
-            <% for (let i = 0; i < likedPeople.length; i++) { %>
+            <% for (let i = 0; i < people.length; i++) { %>
                 <li>
                     <figure>
                         <a href="profile">
-                            <img src="../static/images/<%= likedPeople[i].photo %>" alt="Profilepicture">
+                            <img src="../static/images/<%= people[i].photo %>" alt="Profilepicture">
                         </a>  
                         <figcaption>
-                            <h2><%= likedPeople[i].name %></h2>
-                            <p><%= likedPeople[i].desc %></p>
+                            <h2><%= people[i].name %></h2>
+                            <p><%= people[i].desc %></p>
                             <form action=/ method="post">
-                                <label><input type="checkbox" name="liked"> Like</label>
-
-                                <button class="likebutton">❤</button>
-                                <button class="dislikebutton">x</button>
+                                <button class="likebutton" name="likebutton">❤</button>
+                                <button class="dislikebutton" name="dislikebutton">x</button>
                             </form>
                         </figcaption>
                     </figure>

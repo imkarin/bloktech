@@ -42,28 +42,11 @@ let Abby = new Person('Abby Watts', '25', '005', 'girl4.jpeg', `Yeah, saw them l
 let Christina = new Person('Christina May', '25', '006', 'girl5.jpeg', `Digimon or pokemon?`, `Sup, I'm Christina and I like video games n movies. My fav food is pizza and I love walking my dogs in my free time.`)
 
 const data = {
-  likedPeople: [Olivia, Kayla, Nadia, Eve, Abby, Christina]
+  likedPeople: [],
+  people: [Olivia, Kayla, Nadia, Eve, Abby, Christina]
 }
 
 // Creating end points/route handlers ------------------------------------------------------------
-
-/*   Old homework
-// Send static (html) file:
-app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname + '/static/pagina.html'));
-})
-
-// Send static (mp3) file:
-app.get('/mp3', (req, res) => {
-  res.sendFile(path.join(__dirname + '/static/audio/bruh.mp3'));
-})
-
-// Display query parameters on the page: 
-app.get('/user/:username', function (req, res) {
-  const data = {naam: req.params['username'], movies: ['Uncut Gems', 'Inception', 'Alita: Battle Angel']};
-  res.render('pagina', data)
-})   */
-
 app.get('/', (req, res) => {
     res.render('index', data);
 })
@@ -80,22 +63,15 @@ app.get('/likedpage', (req, res) => {
   res.render('likedpage', data);
 })
 
-// Get input from form on the /add page (week 3 BE class)
-app.get('/add', (req, res) => {
-  res.render('add'); 
-})
-
-app.post('/', (req, res) => { // when the user 'submits' the form, the title gets console logged
-  if (req.body['liked']) {
-    console.log('You liked this person!');
+// Get input: like button/checkbox and console this in the terminal
+app.post('/', (req, res) => { 
+  if ('likebutton' in req.body) {
+    console.log('You liked this person');
   }
-
-  else {
+  else if ('dislikebutton' in req.body) {
     console.log('You did not like this person');
   }
 })
-
-
 
 // Listen on a port
 app.listen(3000);
