@@ -10,10 +10,10 @@
     <title>Liv's profile</title>
 </head>
 <body>
+    <% let currentPerson = people.length - 1; %>
     <header>
         <a href="/">X</a>
-        <img src="../static/images/girl.jpeg" alt="profilepicture Liv">
-        <form action=/ method="post">
+        <img src="../static/images/<%= people[currentPerson].photo %>" alt="Profilepicture">        <form action=/ method="post">
             <button class="likebutton" name="likebutton">❤</button>
             <button class="dislikebutton" name="dislikebutton">x</button>
         </form>
@@ -21,13 +21,13 @@
     
     <main>
         <section>
-            <h1>Olivia Delroy</h1>
-            <p>24, New York</p>
+            <h1><%= people[currentPerson].name %></h1>
+            <p><%= people[currentPerson].age %></p>
         </section>
 
         <section>
             <h4>Description</h4>
-            <p>Sup, I'm Olivia and I like video games 'n movies. My fav food is pizza and i luv puppies. Plees just love me.</p>
+            <p><%= people[currentPerson].desc %></p>
         </section>
 
         <section>
