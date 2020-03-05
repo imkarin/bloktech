@@ -4,6 +4,11 @@ const footerText = document.getElementsByTagName('footer')[0].getElementsByTagNa
 let deleteButtons = document.getElementsByTagName('button');
 let clItems = main.getElementsByTagName('li');
 
+// if likedlist is empty, tell the user it is
+if (clItems.length === 0) {
+    footerText.textContent = `You haven't liked anyone yet.`
+}
+
 // make removebutton invisible when javascript is active 
 for (let i = 0; i < deleteButtons.length; i++){ 
     deleteButtons[i].classList.add('invisible');

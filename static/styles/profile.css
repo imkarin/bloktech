@@ -81,7 +81,7 @@ header img:first-of-type {
 }
 
 /* like button */
-header > button {
+header button {
     padding: 5px 10px;
     bottom: 0;
     right: 20px;
@@ -98,19 +98,19 @@ header > button {
     z-index: 9999;
 }
 
-header > button:active {
+header button:active {
     background: #ff6c71;
     transition-delay: 0s;
     transition-duration: .2s;
 }
 
-header > button:nth-of-type(2) {
+header button:nth-of-type(2) {
     background: #cacaca;
     right: 80px;
 }
 
 
-header > button:nth-of-type(2):active {
+header button:nth-of-type(2):active {
     background: #bb2222;
     transition-delay: 0s;
     transition-duration: .2s;
@@ -169,8 +169,3 @@ main figure > img {
 main figure > figcaption {
     margin-top: 10px;
 }
-
-main > ul > li > button {}
-
-footer {}
-
