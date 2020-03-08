@@ -15,28 +15,12 @@ for (let i = 0; i < deleteButtons.length; i++){
 }
 
 // when user clicks on someone's photo, this person gets deleted from the liked list
-function removeChat(event) {
+function removeChat() {
     this.closest('li').remove();
     
     if (clItems.length === 0) {
         footerText.textContent = `You haven't liked anyone yet.`
     }
-
-    let node = event.target;
-    let id = node.dataset.id;
-
-    var res = new XMLHttpRequest();
-    res.open('DELETE', '/' + id);
-    res.onload = onload;
-    res.send();
-
-    function onload() {
-        if (res.status !== 200) {
-            throw new Error('Could not delete!');
-        }
-
-        window.location = '/';
-  }
 }
 
 // for every liked person...
