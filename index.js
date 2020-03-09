@@ -22,6 +22,22 @@ const slug = require('slug');
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 
+// MongoDB ---------------------------------------------------------------------------------------
+var mongo = require('mongodb')
+
+require('dotenv').config()
+
+var db = null
+var url = "mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASS + "@" + process.env.DB_HOST + "/test?retryWrites=true&w=majority";
+
+mongo.MongoClient.connect(url, function (err, client) {
+  if (err) throw err
+  db = client.db(process.env.DB_NAME)
+})
+
+
+
+
 // users and their data
 class Person{
   constructor(name, age, id, photo, msg, desc, liked) {
