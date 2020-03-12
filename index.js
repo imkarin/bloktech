@@ -23,20 +23,32 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 
 // MongoDB ---------------------------------------------------------------------------------------
-var mongo = require('mongodb')
+const mongo = require('mongodb')
 
 require('dotenv').config()
 
-var db = null
-var url = "mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASS + "@" + process.env.DB_HOST + "/test?retryWrites=true&w=majority";
+let url = "mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASS + "@" + process.env.DB_HOST + "/test?retryWrites=true&w=majority";
+require('dotenv').config()
 
 mongo.MongoClient.connect(url, function (err, client) {
-  if (err) throw err
-  db = client.db(process.env.DB_NAME)
+  if (err) {
+    throw err
+  }
+  let db = client.db(process.env.DB_NAME)
+  
+
+  // server gets all liked users from the database and console logs their names
+  db.collection('users').find({liked: true}).toArray((err, data) => {
+    if (err) {
+      next(err)
+    } else {
+      for (let i = 0; i < data.length; i++) {
+        console.log(data[i]['firstname'])
+      }
+    }
+  })
+
 })
-
-
-
 
 // users and their data
 class Person{
@@ -50,6 +62,7 @@ class Person{
   }
 }
 
+/*
 let Olivia = new Person('Olivia Delroy', '24', '001', 'girl.jpeg', `Hey! I love all of the bands in your...`, `Sup, I'm Olivia and I like video games n movies. My fav food is pizza and I love walking my dogs in my free time.`)
 let Kayla = new Person('Kayla Solomon', '25', '002', 'girl1.jpeg', `What's up :-)`, `Sup, I'm Kayla and I like video games n movies. My fav food is pizza and I love walking my dogs in my free time.`)
 let Nadia = new Person('Nadia Williams', '23', '003', 'girl2.jpeg', `lol ikr`, `Sup, I'm Nadia and I like video games n movies. My fav food is pizza and I love walking my dogs in my free time.`)
@@ -62,7 +75,7 @@ const data = {
   people: [Olivia, Kayla, Nadia, Eve, Abby, Christina]
 }
 
-let i = data['people'].length - 1;
+let i = data['people'].length - 1; */
 
 // Creating end points/route handlers ------------------------------------------------------------
 app.get('/', (req, res) => {
