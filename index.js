@@ -62,7 +62,6 @@ class Person{
   }
 }
 
-/*
 let Olivia = new Person('Olivia Delroy', '24', '001', 'girl.jpeg', `Hey! I love all of the bands in your...`, `Sup, I'm Olivia and I like video games n movies. My fav food is pizza and I love walking my dogs in my free time.`)
 let Kayla = new Person('Kayla Solomon', '25', '002', 'girl1.jpeg', `What's up :-)`, `Sup, I'm Kayla and I like video games n movies. My fav food is pizza and I love walking my dogs in my free time.`)
 let Nadia = new Person('Nadia Williams', '23', '003', 'girl2.jpeg', `lol ikr`, `Sup, I'm Nadia and I like video games n movies. My fav food is pizza and I love walking my dogs in my free time.`)
@@ -75,7 +74,7 @@ const data = {
   people: [Olivia, Kayla, Nadia, Eve, Abby, Christina]
 }
 
-let i = data['people'].length - 1; */
+let i = data['people'].length - 1; 
 
 // Creating end points/route handlers ------------------------------------------------------------
 app.get('/', (req, res) => {
