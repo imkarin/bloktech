@@ -1,6 +1,7 @@
-# Blok Tech: dating app feature
-Welcome to my dating app repo! This repository consists of a [static site](https://karinmeijvogel.github.io/bloktech/) (files in the [/docs folder](https://github.com/KarinMeijvogel/bloktech/tree/master/docs)), several [training excercises](https://github.com/KarinMeijvogel/bloktech/tree/master/homework_excercises/frontend) for the class front-end,
-and the files for the actual feature. To read about the progress and research for this project, check out the [Wiki](https://github.com/KarinMeijvogel/bloktech/wiki).
+# Block Tech: dating app feature
+Welcome to my Block Tech repo! This repository contains the files for a like-feature in a dating app.
+
+You can find the static site for this project [here](https://karinmeijvogel.github.io/bloktech/) (files in the [/docs folder](https://github.com/KarinMeijvogel/bloktech/tree/master/docs)). Besides the front- and back-end code for the feature, you'll also see a folder [homework_excercises](https://github.com/KarinMeijvogel/bloktech/tree/master/homework_excercises/frontend), that contains several training excercises for the front-end class. To read about the progress and research for this project, check out the [Wiki](https://github.com/KarinMeijvogel/bloktech/wiki).
 
 ## Table of contents
 * Installation guide
