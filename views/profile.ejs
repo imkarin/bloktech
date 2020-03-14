@@ -7,27 +7,28 @@
 
     <link href="https://fonts.googleapis.com/css?family=Sansita:400,400i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
-    <title>Liv's profile</title>
+    <title><%= data.firstName %>'s profile</title>
 </head>
 <body>
-    <% let currentPerson = people.length - 1; %>
     <header>
         <a href="/">X</a>
-        <img src="../static/images/<%= people[currentPerson].photo %>" alt="Profilepicture">        <form action=/ method="post">
-            <button class="likebutton" name="likebutton">❤</button>
-            <button class="dislikebutton" name="dislikebutton">x</button>
+        <img src="../static/images/<%= data.photo %>" alt="Profilepicture">
+            <form action="/<%= data.id %>" method="post">
+                <button class="likebutton" name="likebutton">❤</button>
+                <button class="dislikebutton" name="dislikebutton">x</button>
+            </form>
         </form>
     </header>
     
     <main>
         <section>
-            <h1><%= people[currentPerson].name %></h1>
-            <p><%= people[currentPerson].age %></p>
+            <h1><%= data.firstName + ' ' + data.lastName %></h1>
+            <p><%= data.age %></p>
         </section>
 
         <section>
             <h4>Description</h4>
-            <p><%= people[currentPerson].desc %></p>
+            <p><%= data.desc %></p>
         </section>
 
         <section>

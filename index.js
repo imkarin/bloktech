@@ -1,9 +1,6 @@
 // 'Hey there' message when server starts
 const camelCase = require('camelcase');
-console.log(camelCase('hey-there'));
-
-// Require node's path module
-const path = require('path');
+console.log(camelCase('server-started'));
 
 // Express ---------------------------------------------------------------------------------------
 const express = require('express');
@@ -23,95 +20,81 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 
 // MongoDB ---------------------------------------------------------------------------------------
-const mongo = require('mongodb')
+const mongo = require('mongodb');
 
-require('dotenv').config()
+require('dotenv').config();
 
+let db = null;
 let url = "mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASS + "@" + process.env.DB_HOST + "/test?retryWrites=true&w=majority";
-require('dotenv').config()
 
 mongo.MongoClient.connect(url, function (err, client) {
   if (err) {
-    throw err
+    throw err;
   }
-  let db = client.db(process.env.DB_NAME)
-  
+  db = client.db(process.env.DB_NAME);
+  console.log('Connected to database');
+})
 
-  // server gets all liked users from the database and console logs their names
-  db.collection('users').find({liked: true}).toArray((err, data) => {
+// Creating end points/route handlers ------------------------------------------------------------
+app.get('/', allUsers);
+app.get('/browsepage', allUsers);
+app.get('/likedpage', likedUsers);
+app.get('/profile/:id', profile);
+app.post('/:id', like);
+app.delete('/:id', remove);
+
+function allUsers(req, res, next) {
+  db.collection('users').find({liked: undefined}).toArray(done)
+
+  function done(err, data) {
     if (err) {
       next(err)
     } else {
-      for (let i = 0; i < data.length; i++) {
-        console.log(data[i]['firstname'])
-      }
+      res.render('index.ejs', {data: data})
     }
-  })
+  } 
+}
 
-})
+function profile(req, res, next) {
+  let id = req.params.id;
+  db.collection('users').findOne({
+    id: id
+  }, done)
 
-// users and their data
-class Person{
-  constructor(name, age, id, photo, msg, desc, liked) {
-      this.name = name;
-      this.age = age;
-      this.id = id;
-      this.photo = photo;
-      this.msg = msg;
-      this.desc = desc;
+  function done(err, data) {
+    if (err) {
+      next(err)
+    } else {
+      res.render('profile.ejs', {data: data})
+    }
   }
 }
 
-let Olivia = new Person('Olivia Delroy', '24', '001', 'girl.jpeg', `Hey! I love all of the bands in your...`, `Sup, I'm Olivia and I like video games n movies. My fav food is pizza and I love walking my dogs in my free time.`)
-let Kayla = new Person('Kayla Solomon', '25', '002', 'girl1.jpeg', `What's up :-)`, `Sup, I'm Kayla and I like video games n movies. My fav food is pizza and I love walking my dogs in my free time.`)
-let Nadia = new Person('Nadia Williams', '23', '003', 'girl2.jpeg', `lol ikr`, `Sup, I'm Nadia and I like video games n movies. My fav food is pizza and I love walking my dogs in my free time.`)
-let Eve = new Person('Eve Johnson', '24', '004', 'girl3.jpeg', `Are you going to DLDK this year?`, `Sup, I'm Eve and I like video games n movies. My fav food is pizza and I love walking my dogs in my free time.`)
-let Abby = new Person('Abby Watts', '25', '005', 'girl4.jpeg', `Yeah, saw them live 3 weeks ago.`, `Sup, I'm Abby and I like video games n movies. My fav food is pizza and I love walking my dogs in my free time.`)
-let Christina = new Person('Christina May', '25', '006', 'girl5.jpeg', `Digimon or pokemon?`, `Sup, I'm Christina and I like video games n movies. My fav food is pizza and I love walking my dogs in my free time.`)
+function likedUsers(req, res, next) {
+  db.collection('users').find({liked: true}).toArray(done)
 
-const data = {
-  likedPeople: [],
-  people: [Olivia, Kayla, Nadia, Eve, Abby, Christina]
+  function done(err, data) {
+    if (err) {
+      next(err)
+    } else {
+      res.render('likedpage.ejs', {data: data})
+    }
+  } 
 }
 
-let i = data['people'].length - 1; 
-
-// Creating end points/route handlers ------------------------------------------------------------
-app.get('/', (req, res) => {
-    res.render('index', data);
-})
-
-app.get('/browsepage', (req, res) => {
-  res.render('index', data);
-})
-
-app.get('/profile', (req, res) => {
-  res.render('profile', data);
-})
-
-app.get('/likedpage', (req, res) => {
-  res.render('likedpage', data);
-})
-
-// Get input: like button/checkbox and console this in the terminal
-app.post('/', (req, res) => { 
-  // if user liked a person, this person gets added to the likedlist
+function like(req, res, next) {
+  let id = req.params.id;
   if ('likebutton' in req.body) {
-    data['likedPeople'].push(data['people'][i]);
+    db.collection('users').updateOne({id: id}, {$set: {"liked": true}})
+  } else if ('dislikebutton' in req.body) {
+    db.collection('users').updateOne({id: id}, {$set: {"liked": false}})
   }
-  // remove the (dis)liked person from the 'people (to display)' list
-  data['people'].splice(i);
-  i--;
-})
+}
 
-// Delete someone from your likedlist
-app.delete('/:id', (req, res) => {
-let id = req.params.id;
-
-  data['likedPeople'] = data['likedPeople'].filter(function (value) {
-    return value.id !== id;
-  })
-})
+function remove(req, res, next) {
+  let id = req.params.id;
+  db.collection('users').updateOne({id: id}, {$set: {"liked": false}})
+}
 
 // Listen on a port
 app.listen(3000);

@@ -17,16 +17,16 @@
     
     <main>
         <ul>
-            <% for (let i = 0; i < people.length; i++) { %>
+            <% for (let i = 0; i < data.length; i++) { %>
                 <li>
                     <figure>
-                        <a href="profile">
-                            <img src="../static/images/<%= people[i].photo %>" alt="Profilepicture">
+                        <a href="/profile/<%= data[i].id %>">
+                            <img src="../static/images/<%= data[i].photo %>" alt="Profilepicture">
                         </a>  
                         <figcaption>
-                            <h2><%= people[i].name %></h2>
-                            <p><%= people[i].desc %></p>
-                            <form action=/ method="post">
+                            <h2><%= data[i].firstName %></h2>
+                            <p><%= data[i].desc %></p>
+                            <form action="/<%= data[i].id %>" method="post">
                                 <button class="likebutton" name="likebutton">❤</button>
                                 <button class="dislikebutton" name="dislikebutton">x</button>
                             </form>

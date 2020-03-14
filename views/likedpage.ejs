@@ -8,18 +8,18 @@
     </head>
     <body>
         <header>
-            <h1 data-id='hiii'>Liked people</h1>
+            <h1>Liked people</h1>
         </header>
         
         <main>
             <ul>
-                <% for (let i = 0; i < likedPeople.length; i++) { %>
+                <% for (let i = 0; i < data.length; i++) { %>
                     <li>
                         <figure>
-                            <img data-id="<%= likedPeople[i].id %>" src="../static/images/<%= likedPeople[i].photo %>" alt="Profilepicture">
+                            <img data-id="<%= data[i].id %>" src="../static/images/<%= data[i].photo %>" alt="Profilepicture">
                             <figcaption>
-                                <h4><%= likedPeople[i].name %></h4>
-                                <p><%= likedPeople[i].msg %></p>
+                                <h4><%= data[i].firstName %></h4>
+                                <p><%= data[i].msg %></p>
                             </figcaption>
                             <button>X</button>
                         </figure>
