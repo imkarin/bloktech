@@ -15,8 +15,8 @@
         <img src="../static/images/<%= data.photo %>" alt="Profilepicture">
             <form action="/<%= data.id %>" method="post">
                 <button class="likebutton" name="likebutton">❤</button>
-                <button class="dislikebutton" name="dislikebutton">x</button>
             </form>
+            <button data-id="<%= data.id %>" class="dislikebutton" name="dislikebutton">x</button>
         </form>
     </header>
     
@@ -57,5 +57,6 @@
             </ul>
         </section>    
     </main>
+    <script src="../static/scripts/profile.js"></script>
 </body>
 </html>

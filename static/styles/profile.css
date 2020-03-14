@@ -104,13 +104,13 @@ header button:active {
     transition-duration: .2s;
 }
 
-header button:nth-of-type(2) {
+header > button:nth-of-type(1) {
     background: #cacaca;
     right: 80px;
 }
 
 
-header button:nth-of-type(2):active {
+header > button:nth-of-type(1):active {
     background: #bb2222;
     transition-delay: 0s;
     transition-duration: .2s;

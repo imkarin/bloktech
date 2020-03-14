@@ -44,13 +44,13 @@ app.post('/:id', like);
 app.delete('/:id', remove);
 
 function allUsers(req, res, next) {
-  db.collection('users').find({liked: undefined}).toArray(done)
+  db.collection('users').find({liked: false}).toArray(done);
 
   function done(err, data) {
     if (err) {
-      next(err)
+      next(err);
     } else {
-      res.render('index.ejs', {data: data})
+      res.render('index.ejs', {data: data});
     }
   } 
 }
@@ -63,9 +63,9 @@ function profile(req, res, next) {
 
   function done(err, data) {
     if (err) {
-      next(err)
+      next(err);
     } else {
-      res.render('profile.ejs', {data: data})
+      res.render('profile.ejs', {data: data});
     }
   }
 }
@@ -75,9 +75,9 @@ function likedUsers(req, res, next) {
 
   function done(err, data) {
     if (err) {
-      next(err)
+      next(err);
     } else {
-      res.render('likedpage.ejs', {data: data})
+      res.render('likedpage.ejs', {data: data});
     }
   } 
 }
@@ -85,15 +85,15 @@ function likedUsers(req, res, next) {
 function like(req, res, next) {
   let id = req.params.id;
   if ('likebutton' in req.body) {
-    db.collection('users').updateOne({id: id}, {$set: {"liked": true}})
+    db.collection('users').updateOne({id: id}, {$set: {"liked": true}});
   } else if ('dislikebutton' in req.body) {
-    db.collection('users').updateOne({id: id}, {$set: {"liked": false}})
+    db.collection('users').updateOne({id: id}, {$set: {"liked": false}});
   }
 }
 
 function remove(req, res, next) {
   let id = req.params.id;
-  db.collection('users').updateOne({id: id}, {$set: {"liked": false}})
+  db.collection('users').deleteOne({id: id});
 }
 
 // Listen on a port

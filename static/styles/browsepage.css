@@ -138,13 +138,13 @@ main > ul figure > figcaption button:active {
     transition-duration: .2s;
 }
 
-main > ul figure > figcaption button:nth-of-type(2) {
+main > ul figure > figcaption > button:nth-of-type(1) {
     background: #cacaca;
-    right: 65px;
+    margin-right: 65px;
 }
 
 
-main > ul figure > figcaption button:nth-of-type(2):active {
+main > ul figure > figcaption > button:nth-of-type(1):active {
     background: #bb2222;
     transition-delay: 0s;
     transition-duration: .2s;

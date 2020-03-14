@@ -11,8 +11,27 @@ function ratePerson() {
         if (i < (people.length)) { // show next person
             this.closest('li').style.display = 'none';
             i++;
+
+            let node = event.target;
+
+            if (node.classList.contains('dislikebutton')) {
+                let id = node.dataset.id;
+
+                var res = new XMLHttpRequest();
+                res.open('DELETE', '/' + id);
+                res.onload = onload;
+                res.send();
+
+                function onload() {
+                    if (res.status !== 200) {
+                        throw new Error('Could not delete!');
+                    }
+
+                window.location = '/';
+            }
         }
     } 
+}
 
 // eventlisteners
 for (let i = 0; i < likeButtons.length; i++){

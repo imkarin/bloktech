@@ -28,8 +28,8 @@
                             <p><%= data[i].desc %></p>
                             <form action="/<%= data[i].id %>" method="post">
                                 <button class="likebutton" name="likebutton">❤</button>
-                                <button class="dislikebutton" name="dislikebutton">x</button>
                             </form>
+                            <button data-id="<%= data[i].id %>" class="dislikebutton" name="dislikebutton">x</button>
                         </figcaption>
                     </figure>
                 </li>
