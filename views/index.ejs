@@ -24,7 +24,7 @@
                             <img src="../static/images/<%= data[i].photo %>" alt="Profilepicture">
                         </a>  
                         <figcaption>
-                            <h2><%= data[i].firstName %></h2>
+                            <h2><%= data[i].firstName + ' ' + data[i].lastName %></h2>
                             <p><%= data[i].desc %></p>
                             <form action="/<%= data[i].id %>" method="post">
                                 <button class="likebutton" name="likebutton">❤</button>

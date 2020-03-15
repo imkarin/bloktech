@@ -36,8 +36,9 @@ mongo.MongoClient.connect(url, function (err, client) {
   console.log('Connected to database');
   
   // You're a user, with a specific ID (009), logged into the app, connected to your own DB collection...
-  userid = "009";
+  userid = "006";
   userCollection = db.collection("user" + userid);
+  allUsersCollection = db.collection("allUsers");
 })
 
 
@@ -51,7 +52,7 @@ app.delete('/:id', remove);
 app.use(onNotFound);
 
 function allUsers(req, res, next) {
-  userCollection.find({liked: false}).toArray(done);
+  allUsersCollection.find({"id": { $ne: userid }, "ratedBy": { $nin: [userid]}}).toArray(done);
   
   function done(err, data) {
     if (err) {
@@ -64,7 +65,7 @@ function allUsers(req, res, next) {
 
 function profile(req, res, next) {
   let id = req.params.id;
-  userCollection.findOne({
+  allUsersCollection.findOne({
     id: id
   }, done)
   
@@ -78,7 +79,7 @@ function profile(req, res, next) {
 }
 
 function likedUsers(req, res, next) {
-  userCollection.find({liked:true}).toArray(done);
+  userCollection.find().toArray(done);
   
   function done(err, data) {
     if (err) {
@@ -89,9 +90,9 @@ function likedUsers(req, res, next) {
       
       // divide the liked people into two arrays: matches and pending
       for (i = 0; i < data.length; i++) {
-        if (data[i].likedPeople.includes(userid)) {
+        if (data[i].matched == true) {
           matches.push(data[i]);
-        } else {
+        } else if (data[i].matched == null) {
           pending.push(data[i]);
         } 
       } 
@@ -108,13 +109,62 @@ function likedUsers(req, res, next) {
 
 function like(req, res, next) {
   let id = req.params.id;
-  userCollection.updateOne({id: id}, {$set: {"liked": true}});
+  // add our user to the liked person's ratedBy array
+  allUsersCollection.updateOne({id: id}, {$push: {"ratedBy": userid}});
+  
+  // add liked person to our user's hasLiked array
+  allUsersCollection.updateOne({id: userid}, {$push: {"hasLiked": id}});
+
+  // add liked person to our user's liked collection
+  allUsersCollection.findOne({"id" : id}, addToCollection)
+
+  function addToCollection(err, data) {
+    if (err) {
+      next (err)
+    } else {
+      // if liked person had already liked user, set their matched status to true
+      let matchedStatus;
+
+     if (!data.hasDisliked.includes(userid)) {
+      if(data.hasLiked.includes(userid)) {
+        matchedStatus = true;
+      } else {
+        matchedStatus = null;
+      }
+       
+      console.log('liked!');
+       userCollection.insertOne({
+         id: data.id,
+         firstName: data.firstName,
+         lastName: data.lastName,
+         photo: data.photo,
+         msg: "What's up!",
+         matched: matchedStatus
+        })
+        
+        // update matched status in the other person's collection too
+        db.collection("user" + data.id).updateOne({id: userid}, {$set: {matched: matchedStatus}});
+      }
+    }
+  }
+
   res.redirect('/');
 }
 
 function remove(req, res, next) {
   let id = req.params.id;
+  console.log('disliked')
+  // add our user to the liked person's ratedBy array
+  allUsersCollection.updateOne({id: id}, {$push: {"ratedBy": userid}});
+
+  // add disliked/removed person to the user's hasDisliked
+  allUsersCollection.updateOne({id: userid}, {$push: {"hasDisliked": id}});
+
+  // remove person from user's liked collection
   userCollection.deleteOne({id: id});
+
+  // remove user from person's liked collection
+  db.collection("user" + id).deleteOne({id: userid});
 }
 
 function onNotFound(req, res, next) {
