@@ -49,11 +49,26 @@ header {
 
 
 /* main: list with chats (liked people) */
-main > ul {
-    list-style: none;
+main section:nth-of-type(2) ul {
+    opacity: .5;
 }
 
-main > ul > li {
+main section:nth-of-type(2) figure > img {
+    width: 35px;
+    height: 35px;
+}
+
+main ul {
+    list-style: none;
+    padding-bottom: 25px;
+}
+
+main h2 {
+    padding: 0 20px 10px 20px;
+    font-size: 1.1em;
+}
+
+main ul > li {
     padding: 20px;
     background: #fff;
     border-bottom: .5px solid rgba(0, 0, 0, .2)

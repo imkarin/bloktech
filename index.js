@@ -14,8 +14,7 @@ app.use('/static', express.static('static'));
 // EJS -------------------------------------------------------------------------------------------
 app.set('view engine', 'ejs');
 
-// Use body-parser and slug ----------------------------------------------------------------------
-const slug = require('slug');
+// Use body-parser ----------------------------------------------------------------------
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -25,6 +24,8 @@ const mongo = require('mongodb');
 require('dotenv').config();
 
 let db = null;
+let userid = null;
+let userCollection = null;
 let url = "mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASS + "@" + process.env.DB_HOST + "/test?retryWrites=true&w=majority";
 
 mongo.MongoClient.connect(url, function (err, client) {
@@ -33,19 +34,25 @@ mongo.MongoClient.connect(url, function (err, client) {
   }
   db = client.db(process.env.DB_NAME);
   console.log('Connected to database');
+  
+  // You're a user, with a specific ID (009), logged into the app, connected to your own DB collection...
+  userid = "009";
+  userCollection = db.collection("user" + userid);
 })
 
-// Creating end points/route handlers ------------------------------------------------------------
+
+// Creating route handlers ------------------------------------------------------------
 app.get('/', allUsers);
 app.get('/browsepage', allUsers);
 app.get('/likedpage', likedUsers);
 app.get('/profile/:id', profile);
 app.post('/:id', like);
 app.delete('/:id', remove);
+app.use(onNotFound);
 
 function allUsers(req, res, next) {
-  db.collection('users').find({liked: false}).toArray(done);
-
+  userCollection.find({liked: false}).toArray(done);
+  
   function done(err, data) {
     if (err) {
       next(err);
@@ -57,10 +64,10 @@ function allUsers(req, res, next) {
 
 function profile(req, res, next) {
   let id = req.params.id;
-  db.collection('users').findOne({
+  userCollection.findOne({
     id: id
   }, done)
-
+  
   function done(err, data) {
     if (err) {
       next(err);
@@ -71,29 +78,47 @@ function profile(req, res, next) {
 }
 
 function likedUsers(req, res, next) {
-  db.collection('users').find({liked: true}).toArray(done)
-
+  userCollection.find({liked:true}).toArray(done);
+  
   function done(err, data) {
     if (err) {
       next(err);
     } else {
-      res.render('likedpage.ejs', {data: data});
+      let matches = [];
+      let pending = [];
+      
+      // divide the liked people into two arrays: matches and pending
+      for (i = 0; i < data.length; i++) {
+        if (data[i].likedPeople.includes(userid)) {
+          matches.push(data[i]);
+        } else {
+          pending.push(data[i]);
+        } 
+      } 
+      likedPageContent = {
+        matches: matches,
+        pending: pending
+      };
+    
+      // render the matching and pending arrays into the html
+      res.render('likedpage.ejs', {data: likedPageContent});
     }
   } 
 }
 
 function like(req, res, next) {
   let id = req.params.id;
-  if ('likebutton' in req.body) {
-    db.collection('users').updateOne({id: id}, {$set: {"liked": true}});
-  } else if ('dislikebutton' in req.body) {
-    db.collection('users').updateOne({id: id}, {$set: {"liked": false}});
-  }
+  userCollection.updateOne({id: id}, {$set: {"liked": true}});
+  res.redirect('/');
 }
 
 function remove(req, res, next) {
   let id = req.params.id;
-  db.collection('users').deleteOne({id: id});
+  userCollection.deleteOne({id: id});
+}
+
+function onNotFound(req, res, next) {
+  res.status(404).sendFile(__dirname + "/static/notfound.html")
 }
 
 // Listen on a port

@@ -1,5 +1,6 @@
 // html page elements
-const dislikeButtons = document.querySelectorAll('.dislikebutton');
+const dislikeButton = document.querySelectorAll('.dislikebutton')[0];
+const likeButton = document.querySelectorAll('.likebutton')[0];
 
 // when you press the (dis)like button
 function dislikePerson() {
@@ -15,12 +16,15 @@ let node = event.target;
         if (res.status !== 200) {
             throw new Error('Could not delete!');
         }
+    }
 
     window.location = '/';
-    }
+}
+
+function likePerson() {
+    window.location = '/';
 }
 
 // eventlisteners
-for (let i = 0; i < dislikeButtons.length; i++){
-    dislikeButtons[i].addEventListener('click', dislikePerson);
-}
+dislikeButton.addEventListener('click', dislikePerson);
+likeButton.addEventListener('click', likePerson);

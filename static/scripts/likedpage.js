@@ -1,11 +1,13 @@
 // html page elements
-const main = document.getElementsByTagName('main')[0];
-const footerText = document.getElementsByTagName('footer')[0].getElementsByTagName('p')[0];
 let deleteButtons = document.getElementsByTagName('button');
-let clItems = main.getElementsByTagName('li');
+const footerText = document.getElementsByTagName('footer')[0].getElementsByTagName('p')[0];
+const main = document.getElementsByTagName('main')[0];
+const sections = main.getElementsByTagName('section');
+let matchedItems = sections[0].getElementsByTagName('li');
+let pendingItems = sections[1].getElementsByTagName('li');
 
 // if likedlist is empty, tell the user it is
-if (clItems.length === 0) {
+if (pendingItems.length + matchedItems === 0) {
     footerText.textContent = `You haven't liked anyone yet.`
 }
 
@@ -16,12 +18,15 @@ for (let i = 0; i < deleteButtons.length; i++){
 
 // when user clicks on someone's photo, this person gets deleted from the liked list
 function removeChat(event) {
-    this.closest('li').remove();
+    surroundingUl = this.closest('ul');
+    closestHeading = surroundingUl.parentNode.getElementsByTagName('h2')[0];
     
-    if (clItems.length === 0) {
-        footerText.textContent = `You haven't liked anyone yet.`
-    }
+    this.closest('li').remove();
 
+    if (surroundingUl.children.length === 0) {
+        closestHeading.remove();
+    }
+    
     let node = event.target;
     let id = node.dataset.id;
 
@@ -40,7 +45,7 @@ function removeChat(event) {
 }
 
 // for every liked person...
-for (let i = 0; i < clItems.length; i++) {
+for (let i = 0; i < (matchedItems.length + pendingItems.length); i++) {
     
     // give every chat the right details
     const photo = main.getElementsByTagName('img')[i];

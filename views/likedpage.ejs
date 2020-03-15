@@ -12,20 +12,44 @@
         </header>
         
         <main>
-            <ul>
-                <% for (let i = 0; i < data.length; i++) { %>
-                    <li>
-                        <figure>
-                            <img data-id="<%= data[i].id %>" src="../static/images/<%= data[i].photo %>" alt="Profilepicture">
-                            <figcaption>
-                                <h4><%= data[i].firstName %></h4>
-                                <p><%= data[i].msg %></p>
-                            </figcaption>
-                            <button>X</button>
-                        </figure>
-                    </li>
+            <section>
+                <% if (data.matches.length > 0) { %>
+                    <h2>Matches</h2>
                 <% } %>
-            </ul>
+                <ul>
+                    <% for (let i = 0; i < data.matches.length; i++) { %>
+                        <li>
+                            <figure>
+                                <img data-id="<%= data.matches[i].id %>" src="../static/images/<%= data.matches[i].photo %>" alt="Profilepicture">
+                                <figcaption>
+                                    <h4><%= data.matches[i].firstName %></h4>
+                                    <p><%= data.matches[i].msg %></p>
+                                </figcaption>
+                                <button>X</button>
+                            </figure>
+                        </li>
+                        <% } %>
+                    </ul>
+                </section>
+                
+                <section>
+                    <% if (data.pending.length > 0) { %>
+                        <h2>Pending</h2>
+                    <% } %>
+                    <ul>
+                        <% for (let i = 0; i < data.pending.length; i++) { %>
+                            <li>
+                                <figure>
+                                    <img data-id="<%= data.pending[i].id %>" src="../static/images/<%= data.pending[i].photo %>" alt="Profilepicture">
+                                    <figcaption>
+                                        <h4><%= data.pending[i].firstName + " " + data.pending[i].lastName %></h4>
+                                    </figcaption>
+                                    <button>X</button>
+                                </figure>
+                            </li>
+                        <% } %>
+                    </ul>
+                </section>
         </main>
 
         <footer>
