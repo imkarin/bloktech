@@ -1,31 +1,27 @@
-// 'Hey there' message when server starts
-const camelCase = require('camelcase');
-console.log(camelCase('server-started'));
+// "Server started" message --------------------------------------------------------------------
+console.log("Server started, wait for database to connect...");
 
-// Express ---------------------------------------------------------------------------------------
-const express = require('express');
-
-// Init express
+// Express --------------------------------------------------------------------------------------
+const express = require("express");
 const app = express();
 
-// Define static files folder
-app.use('/static', express.static('static'));
+// Define static files folder -------------------------------------------------------------------
+app.use("/static", express.static("static"));
 
-// EJS -------------------------------------------------------------------------------------------
-app.set('view engine', 'ejs');
+// EJS ------------------------------------------------------------------------------------------
+app.set("view engine", "ejs");
 
-// Use body-parser ----------------------------------------------------------------------
-const bodyParser = require('body-parser');
+// Use body-parser ------------------------------------------------------------------------------
+const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 
 // MongoDB ---------------------------------------------------------------------------------------
-const mongo = require('mongodb');
-
-require('dotenv').config();
+require("dotenv").config();
+const mongo = require("mongodb");
 
 let db = null;
 let userid = null;
-let userCollection = null;
+let userCollection = null; // every user has his own personal collection in the db, with data about their connections (people he has liked)
 let url = "mongodb+srv://" + process.env.DB_USER + ":" + process.env.DB_PASS + "@" + process.env.DB_HOST + "/test?retryWrites=true&w=majority";
 
 mongo.MongoClient.connect(url, function (err, client) {
@@ -33,32 +29,52 @@ mongo.MongoClient.connect(url, function (err, client) {
     throw err;
   }
   db = client.db(process.env.DB_NAME);
-  console.log('Connected to database');
+  console.log("Connected to database.");
   
-  // You're a user, with a specific ID (009), logged into the app, connected to your own DB collection...
-  userid = "006";
-  userCollection = db.collection("user" + userid);
+  // the allUsersCollection contains general data about all user accounts
   allUsersCollection = db.collection("allUsers");
 })
 
+// Session --------------------------------------------------------------------------------------
+let session = require("express-session");
 
-// Creating route handlers ------------------------------------------------------------
-app.get('/', allUsers);
-app.get('/browsepage', allUsers);
-app.get('/likedpage', likedUsers);
-app.get('/profile/:id', profile);
-app.post('/:id', like);
-app.delete('/:id', remove);
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true  
+}))
+
+// Creating route handlers ----------------------------------------------------------------------
+app.get("/", allUsers);
+app.get("/login", loginPage);
+app.get("/browsepage", allUsers);
+app.get("/likedpage", likedUsers);
+app.get("/profile/:id", profile);
+app.post("/login", login);
+app.post("/:id", like);
+app.delete("/:id", remove);
 app.use(onNotFound);
 
+function loginPage(req, res, next) {
+  res.render("login.ejs");
+}
+
+function login(req, res, next) {
+  req.session.currentUser = req.body.user;
+  userid = req.session.currentUser;
+  res.redirect("/");
+  console.log("You are now logged in as " + userid);
+}
+
 function allUsers(req, res, next) {
+  // if a user is logged in, load their data
   allUsersCollection.find({"id": { $ne: userid }, "ratedBy": { $nin: [userid]}}).toArray(done);
   
   function done(err, data) {
     if (err) {
       next(err);
     } else {
-      res.render('index.ejs', {data: data});
+      res.render("index.ejs", {data: data});
     }
   } 
 }
@@ -73,52 +89,58 @@ function profile(req, res, next) {
     if (err) {
       next(err);
     } else {
-      res.render('profile.ejs', {data: data});
+      res.render("profile.ejs", {data: data});
     }
   }
 }
 
 function likedUsers(req, res, next) {
+  // update which userCollection we"re in now (the logged in user)
+  userCollection = db.collection("user" + userid);
+
   userCollection.find().toArray(done);
   
   function done(err, data) {
     if (err) {
       next(err);
     } else {
-      let matches = [];
-      let pending = [];
-      
-      // divide the liked people into two arrays: matches and pending
-      for (i = 0; i < data.length; i++) {
-        if (data[i].matched == true) {
-          matches.push(data[i]);
-        } else if (data[i].matched == null) {
-          pending.push(data[i]);
+        let matches = [];
+        let pending = [];
+        
+        // divide the liked people into two arrays: matches and pending
+        for (i = 0; i < data.length; i++) {
+          if (data[i].matched == true) {
+            matches.push(data[i]);
+          } else if (data[i].matched == null) {
+            pending.push(data[i]);
+          } 
         } 
-      } 
-      likedPageContent = {
-        matches: matches,
-        pending: pending
+        likedPageContent = {
+          matches: matches,
+          pending: pending
       };
-    
+      
       // render the matching and pending arrays into the html
-      res.render('likedpage.ejs', {data: likedPageContent});
+      res.render("likedpage.ejs", {data: likedPageContent});
     }
   } 
 }
 
 function like(req, res, next) {
   let id = req.params.id;
-  // add our user to the liked person's ratedBy array
+  // add our user to the liked person"s ratedBy array
   allUsersCollection.updateOne({id: id}, {$push: {"ratedBy": userid}});
   
-  // add liked person to our user's hasLiked array
+  // add liked person to our user"s hasLiked array
   allUsersCollection.updateOne({id: userid}, {$push: {"hasLiked": id}});
 
-  // add liked person to our user's liked collection
-  allUsersCollection.findOne({"id" : id}, addToCollection)
+  // add liked person to our user"s liked collection
+  allUsersCollection.findOne({id : id}, addToCollection)
 
   function addToCollection(err, data) {
+    // update which userCollection we"re in now (the logged in user)
+    userCollection = db.collection("user" + userid);
+
     if (err) {
       next (err)
     } else {
@@ -132,7 +154,7 @@ function like(req, res, next) {
         matchedStatus = null;
       }
        
-      console.log('liked!');
+      console.log(data.id + " liked by " + userid);
        userCollection.insertOne({
          id: data.id,
          firstName: data.firstName,
@@ -142,28 +164,30 @@ function like(req, res, next) {
          matched: matchedStatus
         })
         
-        // update matched status in the other person's collection too
+        // update matched status in the other person"s collection too
         db.collection("user" + data.id).updateOne({id: userid}, {$set: {matched: matchedStatus}});
       }
     }
   }
-
-  res.redirect('/');
+  res.redirect("/");
 }
 
 function remove(req, res, next) {
   let id = req.params.id;
-  console.log('disliked')
-  // add our user to the liked person's ratedBy array
+  console.log(id + " disliked by " + userid)
+  // add our user to the liked person"s ratedBy array
   allUsersCollection.updateOne({id: id}, {$push: {"ratedBy": userid}});
 
-  // add disliked/removed person to the user's hasDisliked
+  // add disliked/removed person to the user"s hasDisliked
   allUsersCollection.updateOne({id: userid}, {$push: {"hasDisliked": id}});
 
-  // remove person from user's liked collection
+  // update which userCollection we"re in now (the logged in user)
+  userCollection = db.collection("user" + userid);
+
+  // remove person from user"s liked collection
   userCollection.deleteOne({id: id});
 
-  // remove user from person's liked collection
+  // remove user from person"s liked collection
   db.collection("user" + id).deleteOne({id: userid});
 }
 
