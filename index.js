@@ -102,8 +102,6 @@ function profile(req, res, next) {
 function likedUsers(req, res, next) {
   // if the user is logged in, load their likedlist
   if (userid !== null) {
-    // update which userCollection we're in now (the logged in user)
-    userCollection = db.collection("user" + userid);
     userCollection.find().toArray(done);
     
     function done(err, data) {
