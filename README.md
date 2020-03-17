@@ -35,7 +35,8 @@ To understand the code better, it's useful to know how the database is structure
 * There's one collection called "allUsers", that contains info about all useraccounts in the app. Think of general information like name, age, description, etc.
 * Every user has his own collection that is initially empty, but will be filled as soon as he starts liking people. Here, every row represents a "connection" that our user and the liked person have, containing information like the "matched" status, messages etc.
 
-<img src="https://i.imgur.com/1i2TOIH.png" width="40%"> <img src="blob:https://imgur.com/d0eb98f7-8e8c-4567-b554-84d98172d39e" width="40%">
+<img src="https://i.imgur.com/1i2TOIH.png" width="400">
+<img src="https://i.imgur.com/W5yw24c.png" width="400">
 
 ## Sources
 ...
