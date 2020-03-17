@@ -148,7 +148,7 @@ function like(req, res, next) {
     if (err) {
       next (err)
     } else {
-      // if liked person had already liked user, set their matched status to true
+      // check whether if it's a match, no match, or pending
       let matchedStatus;
 
      if (!data.hasDisliked.includes(userid)) {
