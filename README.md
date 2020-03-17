@@ -4,7 +4,9 @@ Welcome to my Block Tech repo! This repository contains the files for a like-fea
 You can find the static site for this project [here](https://karinmeijvogel.github.io/bloktech/) (files in the [/docs folder](https://github.com/KarinMeijvogel/bloktech/tree/master/docs)). Besides the code for the feature, you'll also see a folder [homework_excercises](https://github.com/KarinMeijvogel/bloktech/tree/master/homework_excercises/frontend), that contains several training excercises provided by the front- and back-end courses. To read about the progress and research for this project, check out the [Wiki](https://github.com/KarinMeijvogel/bloktech/wiki).
 
 ## Table of contents
+* The matching-feature
 * Installation guide
+* Database
 * Sources
 
 ## Installation guide
@@ -27,6 +29,13 @@ npm run start
 ```
 
 You can now go to _http://localhost:3000/_ in your browser and view the app. Enjoy!
+
+## Database
+To understand the code better, it's useful to know how the database is structured. 
+* There's one collection called "allUsers", that contains info about all useraccounts in the app. Think of general information like name, age, description, etc.
+* Every user has his own collection that is initially empty, but will be filled as soon as he starts liking people. Here, every row represents a "connection" that our user and the liked person have, containing information like the "matched" status, messages etc.
+
+<img src="https://i.imgur.com/kMXo26K.png">
 
 ## Sources
 ...
