@@ -49,4 +49,17 @@ Every user has his own collection that is initially empty, but will be filled as
 <img src="https://i.imgur.com/1i2TOIH.png" width="400">  ->  <img src="https://i.imgur.com/W5yw24c.png" width="400">
 
 ## Sources 🔎
-...
+* Best JavaScript templating engines. (n.d.). Retrieved February 27, 2020, from https://www.slant.co/topics/51/~best-javascript-templating-engines
+
+* Collection Methods — MongoDB Manual. (n.d.). Retrieved March 7, 2020, from https://docs.mongodb.com/manual/reference/method/js-collection/
+
+* EJS -- Embedded JavaScript templating. (n.d.). Retrieved February 27, 2020, from https://ejs.co/
+* Express basic routing. (n.d.). Retrieved February 10, 2020, from https://expressjs.com/en/starter/basic-routing.html
+* Express routing. (n.d.). Retrieved February 27, 2020, from https://expressjs.com/en/guide/routing.html
+* Get Started with Atlas — MongoDB Atlas. (n.d.). Retrieved March 7, 2020, from https://docs.atlas.mongodb.com/getting-started/
+* MongoDB. (n.d.). Compass. Retrieved March 7, 2020, from https://www.mongodb.com/products/compass
+* Mongoose v5.9.5: Getting Started. (n.d.). Retrieved March 7, 2020, from https://mongoosejs.com/docs/
+* NPM global or local packages. (n.d.). Retrieved February 10, 2020, from https://nodejs.dev/npm-global-or-local-packages
+* npm: mongodb. (2020, March 11). Retrieved from https://www.npmjs.com/package/mongodb
+* Traversy Media. (2019a, February 22). Express JS Crash Course [Video file]. Retrieved from https://www.youtube.com/watch?v=L72fhGm1tfE
+* Traversy Media. (2019b, February 6). Node.js Crash Course [Video file]. Retrieved from https://www.youtube.com/watch?v=fBNz5xF-Kx4
