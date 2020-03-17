@@ -33,7 +33,7 @@ Finally, start the server:
 npm run start
 ```
 
-You can now go to _http://localhost:3000/_ in your browser and view the app. Enjoy!
+You can now go to http://localhost:3000/ in your browser and view the app. Enjoy!
 
 ## Database 📂
 To understand the code better, it's useful to know how the database is structured. 
