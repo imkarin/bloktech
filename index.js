@@ -62,23 +62,28 @@ function loginPage(req, res, next) {
 function login(req, res, next) {
   req.session.currentUser = req.body.user;
   userid = req.session.currentUser;
+  userCollection = db.collection("user" + userid);
   res.redirect("/");
-  console.log("You are now logged in as " + userid);
+  console.log("You are now logged in as user " + userid);
 }
 
 function allUsers(req, res, next) {
   // if a user is logged in, load their data
-  allUsersCollection.find({"id": { $ne: userid }, "ratedBy": { $nin: [userid]}}).toArray(done);
-  
-  function done(err, data) {
-    if (err) {
-      next(err);
-    } else {
-      res.render("index.ejs", {data: data});
-    }
-  } 
+  if (userid !== null) {
+    allUsersCollection.find({"id": { $ne: userid }, "ratedBy": { $nin: [userid]}}).toArray(done);
+    
+    function done(err, data) {
+      if (err) {
+        next(err);
+      } else {
+        res.render("index.ejs", {data: data});
+      }
+    } 
+  } else {
+    res.redirect("/login");
+  }
 }
-
+  
 function profile(req, res, next) {
   let id = req.params.id;
   allUsersCollection.findOne({
@@ -95,15 +100,16 @@ function profile(req, res, next) {
 }
 
 function likedUsers(req, res, next) {
-  // update which userCollection we"re in now (the logged in user)
-  userCollection = db.collection("user" + userid);
-
-  userCollection.find().toArray(done);
-  
-  function done(err, data) {
-    if (err) {
-      next(err);
-    } else {
+  // if the user is logged in, load their likedlist
+  if (userid !== null) {
+    // update which userCollection we're in now (the logged in user)
+    userCollection = db.collection("user" + userid);
+    userCollection.find().toArray(done);
+    
+    function done(err, data) {
+      if (err) {
+        next(err);
+      } else {
         let matches = [];
         let pending = [];
         
@@ -118,12 +124,15 @@ function likedUsers(req, res, next) {
         likedPageContent = {
           matches: matches,
           pending: pending
-      };
-      
-      // render the matching and pending arrays into the html
-      res.render("likedpage.ejs", {data: likedPageContent});
-    }
-  } 
+        };
+        
+        // render the matching and pending arrays into the html
+        res.render("likedpage.ejs", {data: likedPageContent});
+      }
+    } 
+  } else {
+    res.redirect("/login");
+  }
 }
 
 function like(req, res, next) {
@@ -138,9 +147,6 @@ function like(req, res, next) {
   allUsersCollection.findOne({id : id}, addToCollection)
 
   function addToCollection(err, data) {
-    // update which userCollection we"re in now (the logged in user)
-    userCollection = db.collection("user" + userid);
-
     if (err) {
       next (err)
     } else {
@@ -178,11 +184,8 @@ function remove(req, res, next) {
   // add our user to the liked person"s ratedBy array
   allUsersCollection.updateOne({id: id}, {$push: {"ratedBy": userid}});
 
-  // add disliked/removed person to the user"s hasDisliked
+  // add disliked/removed person to the user"s hasDisliked array
   allUsersCollection.updateOne({id: userid}, {$push: {"hasDisliked": id}});
-
-  // update which userCollection we"re in now (the logged in user)
-  userCollection = db.collection("user" + userid);
 
   // remove person from user"s liked collection
   userCollection.deleteOne({id: id});

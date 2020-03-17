@@ -7,7 +7,7 @@ function dislikePerson() {
 let node = event.target;
     let id = node.dataset.id;
 
-    var res = new XMLHttpRequest();
+    let res = new XMLHttpRequest();
     res.open('DELETE', '/' + id);
     res.onload = onload;
     res.send();

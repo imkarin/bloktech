@@ -30,7 +30,7 @@ function removeChat(event) {
     let node = event.target;
     let id = node.dataset.id;
 
-    var res = new XMLHttpRequest();
+    let res = new XMLHttpRequest();
     res.open('DELETE', '/' + id);
     res.onload = onload;
     res.send();
@@ -41,7 +41,9 @@ function removeChat(event) {
         }
 
         window.location = '/';
-  }
+
+    }
+// als js niet werkt, via html 'post' request form met een 'delete' value -> alsnog verwijderen
 }
 
 // for every liked person...
