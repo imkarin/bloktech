@@ -5,9 +5,9 @@ You can find the static site for this project [here](https://karinmeijvogel.gith
 
 ## Table of contents 📜
 * [The matching-feature](#the-matching-feature-)
-* [Installation guide](#installation-guide-)
+* [Installation guide](#installation-guide-%EF%B8%8F)
 * [Database](#database-)
-* [Sources](#sources)
+* [Sources](#sources-)
 
 ## The matching feature 🔥
 For this project, I'm working on a like-and-match feature for a dating app. This is based on a scenario where several user accounts have already been created and filled with user-info like name, age, description etc.
