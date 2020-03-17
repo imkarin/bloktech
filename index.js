@@ -44,7 +44,7 @@ app.use(session({
   saveUninitialized: true  
 }))
 
-// Creating route handlers ----------------------------------------------------------------------
+// Handle routes ----------------------------------------------------------------------
 app.get("/", allUsers);
 app.get("/login", loginPage);
 app.get("/browsepage", allUsers);
@@ -85,6 +85,7 @@ function allUsers(req, res, next) {
 }
   
 function profile(req, res, next) {
+  // load profile data
   let id = req.params.id;
   allUsersCollection.findOne({
     id: id
@@ -100,10 +101,18 @@ function profile(req, res, next) {
 }
 
 function likedUsers(req, res, next) {
-  // if the user is logged in, load their likedlist
   if (userid !== null) {
-    userCollection.find().toArray(done);
+    // load current user's name (for in title)
+    let myName;
+    allUsersCollection.findOne({id: userid}, loadMyName);
     
+    function loadMyName(err, docs) {
+      myName = docs.firstName;
+    };
+    
+    // load current user's liked list
+    userCollection.find().toArray(done);
+
     function done(err, data) {
       if (err) {
         next(err);
@@ -119,9 +128,11 @@ function likedUsers(req, res, next) {
             pending.push(data[i]);
           } 
         } 
-        likedPageContent = {
+
+        let likedPageContent = {
           matches: matches,
-          pending: pending
+          pending: pending,
+          myName: myName
         };
         
         // render the matching and pending arrays into the html
@@ -135,13 +146,13 @@ function likedUsers(req, res, next) {
 
 function like(req, res, next) {
   let id = req.params.id;
-  // add our user to the liked person"s ratedBy array
+  // add our user to the liked person's ratedBy array
   allUsersCollection.updateOne({id: id}, {$push: {"ratedBy": userid}});
   
-  // add liked person to our user"s hasLiked array
+  // add liked person to our user's hasLiked array
   allUsersCollection.updateOne({id: userid}, {$push: {"hasLiked": id}});
 
-  // add liked person to our user"s liked collection
+  // add liked person to our user's liked collection
   allUsersCollection.findOne({id : id}, addToCollection)
 
   function addToCollection(err, data) {
@@ -168,7 +179,7 @@ function like(req, res, next) {
          matched: matchedStatus
         })
         
-        // update matched status in the other person"s collection too
+        // update matched status in the other person's collection too
         db.collection("user" + data.id).updateOne({id: userid}, {$set: {matched: matchedStatus}});
       }
     }
@@ -179,16 +190,16 @@ function like(req, res, next) {
 function remove(req, res, next) {
   let id = req.params.id;
   console.log(id + " disliked by " + userid)
-  // add our user to the liked person"s ratedBy array
+  // add our user to the liked person's ratedBy array
   allUsersCollection.updateOne({id: id}, {$push: {"ratedBy": userid}});
 
-  // add disliked/removed person to the user"s hasDisliked array
+  // add disliked/removed person to the user's hasDisliked array
   allUsersCollection.updateOne({id: userid}, {$push: {"hasDisliked": id}});
 
-  // remove person from user"s liked collection
+  // remove person from user's liked collection
   userCollection.deleteOne({id: id});
 
-  // remove user from person"s liked collection
+  // remove user from person's liked collection
   db.collection("user" + id).deleteOne({id: userid});
 }
 
