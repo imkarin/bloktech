@@ -4,7 +4,7 @@ Welcome to my Block Tech repo! This repository contains the files for a matching
 You can find the static site for this project [here](https://karinmeijvogel.github.io/bloktech/) (files in the [/docs folder](https://github.com/KarinMeijvogel/bloktech/tree/master/docs)). Besides the code for the feature, you'll also see a folder [homework_excercises](https://github.com/KarinMeijvogel/bloktech/tree/master/homework_excercises/frontend), that contains several training excercises provided by the front- and back-end courses. To read about the progress and research for this project, check out the [Wiki](https://github.com/KarinMeijvogel/bloktech/wiki).
 
 ## Table of contents 📜
-* [The matching-feature](#matching)
+* [The matching-feature](#The-matching---feature)
 * Installation guide
 * Database
 * Sources
