@@ -10,7 +10,7 @@ You can find the static site for this project [here](https://karinmeijvogel.gith
 * [Sources](#sources-)
 
 
-<img src="https://i.imgur.com/TtBEJ8z.png" width="32%"><img src="https://i.imgur.com/hqh7Jhv.png" width="32%"><img src="https://i.imgur.com/QPssjUy.png" width="32%">
+<img src="https://i.imgur.com/TtBEJ8z.png" width="33%"><img src="https://i.imgur.com/hqh7Jhv.png" width="33%"><img src="https://i.imgur.com/QPssjUy.png" width="33%">
 
 ## The matching feature 🔥
 For this project, I'm working on a like-and-match feature for a dating app. This is based on a scenario where several user accounts have already been created and filled with user-info like name, age, description etc.
