@@ -37,6 +37,7 @@ npm run start
 ```
 
 You can now go to http://localhost:3000/ in your browser and view the app. Enjoy!
+
 If you want to switch between different users, go to the /login page.
 
 ## Database 📂
