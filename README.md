@@ -9,10 +9,15 @@ You can find the static site for this project [here](https://karinmeijvogel.gith
 * [Database](#database-)
 * [Sources](#sources-)
 
+
+<img src="https://i.imgur.com/TtBEJ8z.png" width="150"> 
+<img src="https://i.imgur.com/hqh7Jhv.png" width="150"> 
+<img src="https://i.imgur.com/QPssjUy.png" width="150">
+
 ## The matching feature 🔥
 For this project, I'm working on a like-and-match feature for a dating app. This is based on a scenario where several user accounts have already been created and filled with user-info like name, age, description etc.
 
-When running the app, you'll be asked to login as one of the users. Once you do, you'll see your personal dashboard where you can discover new people and like them. You also have a personal 'liked people' page, where you can see your matches and pending likes. Log in as several different users to see how the app behaves when users have liked each other, disliked each other or are waiting to be matched! 
+When running the app, you'll be asked to login as one of the users. Once you do, you'll see your personal dashboard where you can discover new people, view their profiles and like them. You also have a personal 'liked people' page, where you can see your matches and pending likes. Log in as several different users to see how the app behaves when users have liked each other, disliked each other or are waiting to be matched! 
 
 ## Installation guide 🖱️
 To try the feature for yourself, clone the repository to your desired location. Then navigate to it:
@@ -34,6 +39,7 @@ npm run start
 ```
 
 You can now go to http://localhost:3000/ in your browser and view the app. Enjoy!
+If you want to switch between different users, go to the /login page.
 
 ## Database 📂
 To understand the code better, it's useful to know how the database is structured. 
