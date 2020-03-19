@@ -54,6 +54,41 @@ Every user has his own collection that is initially empty, but will be filled as
 <img src="https://i.imgur.com/1i2TOIH.png" width="400">  ->  <img src="https://i.imgur.com/W5yw24c.png" width="400">
 
 ## Sources 🔎
+### Project Tech
+* airbnb. (n.d.). airbnb/javascript. Retrieved February 5, 2020, from https://github.com/airbnb/javascript/blob/master/README.md#arrow-functions
+
+* F. (n.d.). Atom vs Sublime Text vs Visual Studio Code | What are the differences? Retrieved February 20, 2020, from https://stackshare.io/stackups/atom-vs-sublime-text-vs-visual-studio-code
+
+* Goldspink, M. (2017, January 18). Best Text Editor? Atom vs Sublime vs Visual Studio Code vs Vim. Retrieved from https://www.codementor.io/@mattgoldspink/best-text-editor-atom-sublime-vim-visual-studio-code-du10872i7
+
+* Hartikainen, J. (2015, March 5). A Comparison of JavaScript Linting Tools. Retrieved from https://www.sitepoint.com/comparison-javascript-linting-tools/
+
+* javascript linting tools comparison. (n.d.). Retrieved February 20, 2020, from https://codeburst.io/javascript-linting-tools-comparison-ebcb4aa23c49
+
+* JavaScript Style Guide. (n.d.). Retrieved February 5, 2020, from https://www.w3schools.com/js/js_conventions.asp
+
+### Frontend
+* Closures. (2020, March 6). Retrieved from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+
+* JavaScript Hoisting. (n.d.). Retrieved March 19, 2020, from https://www.w3schools.com/js/js_hoisting.asp
+
+* The Coding Train. (2017, February 22). 9.19: Prototypes in Javascript - p5.js Tutorial [Video file]. Retrieved from https://www.youtube.com/watch?v=hS_WqkyUah8
+
+* The Coding Train. (2019, February 28). 9.20: Look away! Inheritance with Prototype in JavaScript - p5.js Tutorial [Video file]. Retrieved from https://www.youtube.com/watch?v=CpmE5twq1h0
+
+* Ontwikkelen met progressive enhancement · Fronteers. (n.d.). Retrieved February 25, 2020, from https://fronteers.nl/blog/2015/05/ontwikkelen-met-progressive-enhancement
+
+* Progressive Enhancement: What It Is, And How To Use It? (2009, April 22). Retrieved from https://www.smashingmagazine.com/2009/04/progressive-enhancement-what-it-is-and-how-to-use-it/
+
+* Cosset, D. (2019, February 16). Higher-order functions in Javascript. Retrieved from https://dev.to/damcosset/higher-order-functions-in-javascript-4j8b
+
+* Higher-Order Functions :: Eloquent JavaScript. (n.d.). Retrieved March 5, 2020, from https://eloquentjavascript.net/05_higher_order.html
+
+* Loops and iteration. (2020, January 30). Retrieved from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration
+
+* The Coding Train. (2018, February 19). 16.5: Higher Order Functions in JavaScript - Topics of JavaScript/ES6 [Video file]. Retrieved from https://www.youtube.com/watch?v=H4awPsyugS0
+
+### Backend
 * Best JavaScript templating engines. (n.d.). Retrieved February 27, 2020, from https://www.slant.co/topics/51/~best-javascript-templating-engines
 
 * Collection Methods — MongoDB Manual. (n.d.). Retrieved March 7, 2020, from https://docs.mongodb.com/manual/reference/method/js-collection/
