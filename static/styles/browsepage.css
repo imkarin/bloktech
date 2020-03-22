@@ -42,15 +42,6 @@ a:hover {
 }
 
 /* browse page header */
-/* header {
-    width: 100%;
-    max-width: 850px;
-    padding: 30px 25px;
-    margin-left: auto;
-    margin-right: auto; 
-    overflow: hidden;
-} */
-
 header {
     display: none;
 }
@@ -61,7 +52,7 @@ main {
 
     width:100%;
     height: calc(100vh - 60px); /* viewport height - nav height */
-    max-width: 850px;
+    max-width: 1150px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -76,7 +67,7 @@ main > ul {
 main > ul > li {
     position: absolute;
     margin-bottom: 10px;
-    border-radius: 9px;
+    border-radius: 4px;
     padding: 25px;
     background: #fff;
     width: 100%;
@@ -99,8 +90,8 @@ main > ul figure img {
     width: calc(100% + 50px);
     display:block;
     background: #fffaaa;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     object-fit: cover;
     object-position: center;
 }
@@ -150,22 +141,6 @@ main > ul figure > figcaption > button:nth-of-type(1):active {
     transition-duration: .2s;
 }
 
-
-main > ul figure > figcaption > section {
-    position: absolute;
-    bottom: 25px;
-    display: flex;
-    justify-content: start;
-}
-
-main > ul figure > figcaption > section > p {
-    margin-right: 8px;
-    padding: 6px 15px;
-    border-radius: 4px;
-    background: #ffb4b7;
-    color: white;
-}
-
 /* when there are no more people to display, screen becomes empty */
 main > li.invisible {
     display: none;
@@ -181,7 +156,59 @@ main > p:last-child {
     opacity: .8;
 }
 
+/* main on desktop */
+@media only screen and (min-width: 800px) {
+    body {
+        height: 100vh;
+        overflow: hidden;
+    }
+    main {
+        overflow-x:hidden;
+        margin: 50vh auto;
+        transform: translateY(-50%);
+        padding: 25px;
+        border-radius: 15px;
+        height: 500px;
+    }
+
+    /* browse page, people cards (click for detail, like or dislike */
+    main > ul figure {
+        display: flex;
+    }
+
+    main > ul figure a {
+        width: 40%;
+    }
+
+    main > ul figure img {
+        height: calc(100% + 50px);
+        width: 100%;
+        border-radius: 0;
+    }
+
+    main > ul figure > figcaption {
+        margin: 25px;
+        max-width: 60%;
+        height: 100%;
+    }
+
+    main > ul figure > figcaption button {
+        position: absolute;
+        bottom: 45px;
+        right: 0;
+        top: auto;
+    }
+
+    main > ul figure > figcaption > button:nth-of-type(1) {
+        margin-right: 70px;
+    }
+}
+
 /* bottom nav */
+nav > img {
+    display: none;
+}
+
 nav {
     width: 100%;
     height: 60px;
@@ -207,7 +234,7 @@ nav ul {
     letter-spacing: 1.2px;
 }
 
-nav img {
+nav ul img {
     margin: 7px auto 0 auto;
     width: 20px;
     opacity: .33;
@@ -221,4 +248,38 @@ nav ul > li:nth-of-type(2) > a {
 
 nav ul > li:nth-of-type(2) > a > img {
     opacity: .9;
+}
+
+@media only screen and (min-width: 800px) {
+    /* bottom nav */
+    nav > img {
+        width: 150px;
+        align-self: center;
+        display: block;
+        margin: 0;
+        opacity: 1;
+    }
+
+    nav {
+        position: absolute;
+        top: 0;
+        padding: 25px 25px 0 25px;
+        width: 100vw;
+        background-color: transparent;
+        box-shadow: none;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    nav ul {
+        margin: 0;
+        width: 300px;
+        font-size: .85em;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+    }
+
+    nav ul img {
+        display: none;
+    }
 }
