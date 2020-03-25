@@ -16,7 +16,8 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 
 // MongoDB ---------------------------------------------------------------------------------------
-require("dotenv").config();
+require("aws-sdk");
+
 const mongo = require("mongodb");
 
 let db = null;
