@@ -18,7 +18,8 @@
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
-    "mongodb": "^3.5.4"
+    "mongodb": "^3.5.4",
+    "aws-sdk": "^2.656.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
